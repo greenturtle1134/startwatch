@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+	</head>
+	<body>
+	<div class="container-fluid text-center vh-100" id="app">
+		<div class="row py-2 h-50">
+			<div class="col-3">
+				<button type="button" class="btn btn-success w-100 h-100 fs-1" @click="mark(1)">
+					<i class="bi bi-check-lg"></i>
+				</button>
+			</div>
+			<div class="col-3">
+				<button type="button" class="btn btn-warning w-100 h-100 fs-1" @click="mark(2)">
+					<i class="bi bi-question-lg"></i>
+				</button>
+			</div>
+			<div class="col-3">
+				<button type="button" class="btn btn-danger w-100 h-100 fs-1" @click="mark(3)">
+					<i class="bi bi-x-lg"></i>
+				</button>
+			</div>
+			<div class="col-3">
+				<button type="button" class="btn btn-secondary w-100 h-100 fs-1" @click="mark(0)">
+					<i class="bi bi-pause-fill"></i>
+				</button>
+			</div>
+		</div>
+		<div class="row py-2">
+			<div class="col">
+				<p class="fst-italic my-0">Last mark: {{ (new Date(marks[marks.length-1].time)).toLocaleTimeString() }}</p>
+				<p class="fst-italic my-0">Time between last marks: {{ fTime(lastInterval) }}</p>
+			</div>
+		</div>
+		<div class="row py-2">
+			<div class="col-5">
+				<div class="border border-3 h-100">
+					<p>Productive time:</p>
+					<p class="fs-1">{{ fTime(minGood) }} - {{ fTime(maxGood) }}</p>
+				</div>
+			</div>
+			<div class="col-5">
+				<div class="border border-3 h-100">
+					<p>Productive percent:</p>
+					<p class="fs-1">{{ fPercent(minGood / totalTime) }} - {{ fPercent(maxGood / totalTime) }}</p>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="border border-3 h-100">
+					<p class="my-0">Marks: {{ marks.length-1 }}</p>
+					<p class="my-0">Total time: {{ fTime(totalTime) }}</p>
+					<p class="my-0">Start: {{ (new Date(marks[0].time)).toLocaleTimeString() }}</p>
+					<button type="button" class="btn btn-warning m-1" @click="undo()">
+						Undo
+					</button>
+					<button type="button" class="btn btn-danger m-1" @click="resetMarks()">
+						Reset
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
+	</body>
+</html>
